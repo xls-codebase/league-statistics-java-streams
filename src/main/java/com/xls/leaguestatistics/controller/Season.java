@@ -7,6 +7,7 @@ import com.xls.leaguestatistics.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Provides all necessary methods for season simulation
@@ -35,7 +36,14 @@ public class Season {
      * Following solution represents the robin-round tournament.
      */
     private void playAllGames() {
-        throw new RuntimeException("playAllGames method not implemented");
+        if (league.size() % 2 != 0) {
+            throw new RuntimeException("Number of teams in league must be even");
+        }
+        IntStream.range(0, league.size()).forEach(i -> {
+            IntStream.range(i, league.size()).forEach(j -> {
+                playMatch(league.get(i), league.get(j));
+            });
+        });
     }
 
     /**
