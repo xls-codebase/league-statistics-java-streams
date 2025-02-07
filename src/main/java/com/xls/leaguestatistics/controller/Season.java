@@ -40,7 +40,21 @@ public class Season {
      * Plays single game between two teams and displays result after.
      */
     private void playMatch(Team team1, Team team2) {
-        throw new RuntimeException("playMatch method not implemented");
+        int scoredGoalsTeam1 = getScoredGoals(team1);
+        int scoredGoalsTeam2 = getScoredGoals(team2);
+
+        if (scoredGoalsTeam1 > scoredGoalsTeam2) {
+            team1.setWins(team1.getWins() + 1);
+            team2.setLoses(team2.getLoses() + 1);
+        } else if (scoredGoalsTeam1 < scoredGoalsTeam2) {
+            team2.setWins(team2.getWins() + 1);
+            team1.setLoses(team1.getLoses() + 1);
+        } else {
+            team1.setDraws(team1.getDraws() + 1);
+            team2.setDraws(team2.getDraws() + 1);
+        }
+
+        // TODO: display results
     }
 
     /**
