@@ -1,9 +1,11 @@
 package com.xls.leaguestatistics.factory;
 
 import com.xls.leaguestatistics.Utils;
+import com.xls.leaguestatistics.model.Division;
 import com.xls.leaguestatistics.model.Player;
 import com.xls.leaguestatistics.model.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,7 +21,15 @@ public class LeagueFactory {
      * @return Full set of teams with players
      */
     public static List<Team> createLeague(int teamsInDivision) {
-        throw new RuntimeException("createLeague method not implemented");
+        List<Team> teams = new ArrayList<>();
+        Stream.of(Division.values()).forEach(division -> {
+            Stream.generate(Team::new).limit(teamsInDivision).forEach(team -> {
+                team.setDivision(division);
+                team.setPlayers(getPlayers(Utils.TEAM_SIZE));
+                teams.add(team);
+            });
+        });
+        return teams;
     }
 
     /**
