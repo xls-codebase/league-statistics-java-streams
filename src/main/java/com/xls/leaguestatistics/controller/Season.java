@@ -74,7 +74,7 @@ public class Season {
      */
     private int getScoredGoals(Team team) {
         List<Player> playersWhoScoredAGoalBasedOnSkillRate = team.getPlayers().stream()
-                .filter(player -> Utils.getRandomValue(0, (int) Math.round(player.getSkillRate() * 0.01)) > 0)
+                .filter(player -> Utils.getRandomValue(0, (int) Math.ceil(player.getSkillRate() * 0.1)) > 0)
                 .toList();
 
         playersWhoScoredAGoalBasedOnSkillRate.forEach(player -> player.setGoals(player.getGoals() + 1));
