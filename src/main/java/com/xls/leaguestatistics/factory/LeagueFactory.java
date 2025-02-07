@@ -5,6 +5,7 @@ import com.xls.leaguestatistics.model.Player;
 import com.xls.leaguestatistics.model.Team;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Provides full set of teams with players
@@ -25,7 +26,12 @@ public class LeagueFactory {
      * Returns a collection with a given amount of newly created players
      */
     private static List<Player> getPlayers(int amount) {
-        throw new RuntimeException("getPlayers method not implemented");
+        List<Player> players = Stream.generate(Player::new)
+                .limit(amount)
+                .toList();
+        players.forEach(player -> player.setSkillRate(getPlayerSkillRate()));
+        return players;
+
     }
 
     private static int getPlayerSkillRate() {
