@@ -21,7 +21,7 @@ public class LeagueStatistics {
      * Gets all players from each team in one collection.
      */
     public static List<Player> getAllPlayers(List<Team> teams) {
-        throw new RuntimeException("getAllPlayers method not implemented");
+        return teams.stream().map(Team::getPlayers).flatMap(List::stream).toList();
     }
 
     /**
