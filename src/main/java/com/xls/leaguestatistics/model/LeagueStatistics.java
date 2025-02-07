@@ -1,5 +1,6 @@
 package com.xls.leaguestatistics.model;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ public class LeagueStatistics {
      * Gets all teams with highest points order, if points are equal next deciding parameter is sum of goals of the team.
      */
     public static List<Team> getAllTeamsSorted(List<Team> teams) {
-        throw new RuntimeException("getAllTeamsSorted method not implemented");
+    return teams.stream().sorted(Comparator.comparing(Team::getCurrentPoints)
+                    .thenComparingInt(team -> team.getPlayers().stream().mapToInt(Player::getGoals).sum()).reversed())
+                .toList();
     }
 
     /**
