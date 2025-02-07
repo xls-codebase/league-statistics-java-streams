@@ -1,6 +1,8 @@
 package com.xls.leaguestatistics.controller;
 
+import com.xls.leaguestatistics.Utils;
 import com.xls.leaguestatistics.factory.LeagueFactory;
+import com.xls.leaguestatistics.model.Player;
 import com.xls.leaguestatistics.model.Team;
 
 import java.util.ArrayList;
@@ -63,6 +65,13 @@ public class Season {
      * @return All goals scored by the team in current game
      */
     private int getScoredGoals(Team team) {
-        throw new RuntimeException("getScoredGoals method not implemented");
+        List<Player> playersWhoScoredAGoalBasedOnSkillRate = team.getPlayers().stream()
+                .filter(player -> Utils.getRandomValue(0, (int) Math.round(player.getSkillRate() * 0.01)) > 0)
+                .toList();
+
+        playersWhoScoredAGoalBasedOnSkillRate.forEach(player -> player.setGoals(player.getGoals() + 1));
+
+        return playersWhoScoredAGoalBasedOnSkillRate.size();
+
     }
 }
