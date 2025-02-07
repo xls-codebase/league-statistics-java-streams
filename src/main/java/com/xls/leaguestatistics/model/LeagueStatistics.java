@@ -28,7 +28,7 @@ public class LeagueStatistics {
      * Gets team with the longest name
      */
     public static Team getTeamWithTheLongestName(List<Team> teams) {
-        throw new RuntimeException("getTeamWithTheLongestName method not implemented");
+        return teams.stream().max(Comparator.comparing(team -> team.getName().length())).get();
     }
 
     /**
