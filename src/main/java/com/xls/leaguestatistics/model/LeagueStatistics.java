@@ -55,7 +55,8 @@ public class LeagueStatistics {
      * Gets all teams, where there are players with no scored goals.
      */
     public static List<Team> getTeamsWithPlayersWithoutGoals(List<Team> teams){
-        throw new RuntimeException("getTeamsWithPlayersWithoutGoals method not implemented");
+        return teams.stream().filter(team -> team.getPlayers().stream()
+                .anyMatch(player -> player.getGoals() == (0))).toList();
     }
 
     /**
