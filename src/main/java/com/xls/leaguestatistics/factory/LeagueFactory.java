@@ -24,6 +24,7 @@ public class LeagueFactory {
         List<Team> teams = new ArrayList<>();
         Stream.of(Division.values()).forEach(division -> {
             Stream.generate(Team::new).limit(teamsInDivision).forEach(team -> {
+                team.setName(NamesGenerator.getTeamName());
                 team.setDivision(division);
                 team.setPlayers(getPlayers(Utils.TEAM_SIZE));
                 teams.add(team);
@@ -39,7 +40,10 @@ public class LeagueFactory {
         List<Player> players = Stream.generate(Player::new)
                 .limit(amount)
                 .toList();
-        players.forEach(player -> player.setSkillRate(getPlayerSkillRate()));
+        players.stream().forEach(player -> {
+            player.setName(NamesGenerator.getPlayerName());
+            player.setSkillRate(getPlayerSkillRate());
+        });
         return players;
 
     }
