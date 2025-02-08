@@ -28,7 +28,7 @@ public class LeagueStatistics {
      * Gets team with the longest name
      */
     public static Team getTeamWithTheLongestName(List<Team> teams) {
-        return teams.stream().max(Comparator.comparing(team -> team.getName().length())).get();
+        return teams.stream().max(Comparator.comparingInt(team -> team.getName().length())).get();
     }
 
     /**
