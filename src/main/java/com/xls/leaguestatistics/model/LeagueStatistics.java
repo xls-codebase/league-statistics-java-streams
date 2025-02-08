@@ -47,7 +47,8 @@ public class LeagueStatistics {
      * Gets a player with the biggest goals number from each team.
      */
     public static List<Player> getTopPlayersFromEachTeam(List<Team> teams) {
-        throw new RuntimeException("getTopPlayersFromEachTeam method not implemented");
+        return teams.stream().map(team -> team.getPlayers().stream()
+                .max(Comparator.comparingInt(Player::getGoals)).get()).toList();
     }
 
     /**
