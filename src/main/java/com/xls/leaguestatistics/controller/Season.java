@@ -4,6 +4,7 @@ import com.xls.leaguestatistics.Utils;
 import com.xls.leaguestatistics.factory.LeagueFactory;
 import com.xls.leaguestatistics.model.Player;
 import com.xls.leaguestatistics.model.Team;
+import com.xls.leaguestatistics.view.Display;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Season {
         this.league = LeagueFactory.createLeague(6);
         playAllGames();
         // Call Display methods below
+        Display.displayTeamStatistics(league);
 
     }
 
@@ -63,8 +65,7 @@ public class Season {
             team1.setDraws(team1.getDraws() + 1);
             team2.setDraws(team2.getDraws() + 1);
         }
-
-        // TODO: display results
+        Display.displaySingleMatchResult(team1, scoredGoalsTeam1, team2, scoredGoalsTeam2);
     }
 
     /**
