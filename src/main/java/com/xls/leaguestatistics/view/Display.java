@@ -1,5 +1,6 @@
 package com.xls.leaguestatistics.view;
 
+import com.xls.leaguestatistics.model.LeagueStatistics;
 import com.xls.leaguestatistics.model.Player;
 import com.xls.leaguestatistics.model.Team;
 import com.xls.leaguestatistics.view.table.Table;
@@ -13,7 +14,8 @@ public class Display {
 
     public static void displayTeamStatistics(List<Team> teams) {
         List<String>columnIdentifiers = List.of("Name", "Points", "Goals", "Wins", "Draws", "Losses");
-        List<List<String>> tableData = teams.stream().map(team -> List.of(team.getName(),
+        List<Team> sortedTeams = LeagueStatistics.getAllTeamsSorted(teams);
+        List<List<String>> tableData = sortedTeams.stream().map(team -> List.of(team.getName(),
                 "" + team.getCurrentPoints(),
                 "" + team.getPlayers().stream().mapToInt(Player::getGoals).sum(),
                 "" + team.getWins(),
